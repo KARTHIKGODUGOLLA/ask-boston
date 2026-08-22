@@ -21,6 +21,7 @@ questions, the corpus, or the grader.
 """
 from __future__ import annotations
 
+import argparse
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -77,8 +78,9 @@ def generate(question: str, chunks: list[dict]) -> str | None:
 
 # -- the real entry point ---------------------------------------------------
 
-def respond(question: str, chunks: list[dict] | None = None) -> Answer:
-    chunks = chunks if chunks is not None else retrieve(question)
+def respond(question: str, chunks: list[dict] | None = None,
+            collection: str = COLLECTION) -> Answer:
+    chunks = chunks if chunks is not None else retrieve(question, collection=collection)
     decision = router.route(question)
     passages = "\n\n---\n\n".join(f"[{c['source']}]\n{c['text']}" for c in chunks)
     sources = sorted({c["source"] for c in chunks})
@@ -101,7 +103,7 @@ def respond(question: str, chunks: list[dict] | None = None) -> Answer:
     if draft is None:
         return Answer("(no answer — model offline)", decision.label, sources, sql, computed)
 
-    verdict = grounded.audit(question, draft, passages, computed)
+    verdict = grounded.audit(question, draft, evidence, computed)
     if not verdict.ok:
         summary = "; ".join(sources) or "no matching records"
         return Answer(grounded.abstain(f"Records consulted: {summary}."),
@@ -111,10 +113,15 @@ def respond(question: str, chunks: list[dict] | None = None) -> Answer:
 
 
 def main() -> None:
-    question = " ".join(sys.argv[1:]).strip()
+    ap = argparse.ArgumentParser(description="Ask ask-boston one question.")
+    ap.add_argument("--collection", default=COLLECTION,
+                    help="fortpoint_civic (default) or boston_open_data")
+    ap.add_argument("question", nargs="*")
+    args = ap.parse_args()
+    question = " ".join(args.question).strip()
     if not question:
-        raise SystemExit('Usage: python -m civic.pipeline "your question"')
-    result = respond(question)
+        raise SystemExit('Usage: python -m civic.pipeline [--collection X] "your question"')
+    result = respond(question, collection=args.collection)
     print(f"\nQ: {question}")
     print(f"-- route: {result.route}")
     if result.sql:

@@ -11,7 +11,7 @@ Q_LAB   := lab0_boston/questions.json      # 24 Fort Point questions (fiction, c
 Q_REAL  := eval/questions_boston.json      # 10 real-data questions (verified in pandas)
 LIMIT   := 2000                            # rows per CSV — MUST match on both sides
 
-.PHONY: help setup data split tables prove ask baseline-ask \
+.PHONY: help setup data split tables prove ask baseline-ask ask-real baseline-ask-real \
         freeze-baseline ingest score-before score-after \
         score-before-real score-after-real compare demo clean-index
 
@@ -54,8 +54,14 @@ prove: ## No-LLM proof that computed answers are exact — run this first
 ask: ## Ask our pipeline: make ask Q="..."
 	$(PY) -m civic.pipeline "$(Q)"
 
-baseline-ask: ## The same question, naively: make baseline-ask Q="..."
+baseline-ask: ## The same question, naively (Fort Point): make baseline-ask Q="..."
 	$(PY) -m baseline.naive_rag --corpus-dir $(CORPUS) --collection fortpoint_naive "$(Q)"
+
+ask-real: ## THE DEMO. Ask ours over live Boston data: make ask-real Q="..."
+	$(PY) -m civic.pipeline --collection boston_open_data "$(Q)"
+
+baseline-ask-real: ## THE DEMO. Same question, naive baseline over live Boston data
+	$(PY) -m baseline.naive_boston "$(Q)"
 
 # -- the measurement --------------------------------------------------------
 # Suite 1: Fort Point, 24 questions. Fiction, but calibrated — verified ground
