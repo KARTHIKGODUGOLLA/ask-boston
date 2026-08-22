@@ -97,4 +97,9 @@ def retrieve(question: str, k: int = TOP_K, docs_dir: Path = DOCS_DIR,
 
     fused = _rrf([dense, sparse])
     top = sorted(fused, key=fused.get, reverse=True)[:k]
-    return [{"id": i, "text": by_id[i], "source": meta[i]["source"]} for i in top]
+    return [{"id": i, "text": by_id[i], "source": _source(meta[i])} for i in top]
+
+
+def _source(m: dict) -> str:
+    """Fort Point chunks carry 'source'; Boston CSV rows carry dataset+rows."""
+    return m.get("source") or f"{m.get('dataset', '?')} rows {m.get('rows', '?')}"

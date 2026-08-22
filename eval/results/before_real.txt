@@ -1,0 +1,24 @@
+PIPELINE: baseline.naive_boston    COLLECTION: baseline_frozen
+RUN AT:   2026-08-22T13:14:58
+
+  [ 1/10] A1 fabricated        How many 311 service requests in the export were fil
+  [ 2/10] A2 correct           How many Rodent Activity reports were filed in Dorch
+  [ 3/10] A3 fabricated        How many 311 cases in the export are still open, and
+  [ 4/10] T1 wrong             What date range does this 311 export cover, and how 
+  [ 5/10] T2 correct           Are 311 requests being closed on time more often tha
+  [ 6/10] M1 correct           Why did rodent activity increase in Dorchester this 
+  [ 7/10] M2 fabricated        Why was a given food establishment's license suspend
+  [ 8/10] D1 correct           In this dataset, what is the difference between 'rea
+  [ 9/10] S1 correct           Which channel do most 311 requests arrive through, a
+  [10/10] C1 fabricated        How many total service requests are in the 311 datas
+
+PER-CATEGORY RESULTS
+  Aggregation & Counting                    1.0 / 3
+  Contradictory Information                 0.0 / 1
+  Domain Confusion                          1.0 / 1
+  Missing Context Scenarios                 1.0 / 2
+  Technical Domain Integration              1.0 / 1
+  Temporal Complexity                       1.0 / 2
+
+TOTAL: 5.0 / 10  ->  50%   BAND: POOR (<60)
+FABRICATIONS: A1, A3, M2, C1   <-- CRITICAL FAILURE

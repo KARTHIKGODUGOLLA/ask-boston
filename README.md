@@ -95,19 +95,58 @@ handing our best work to the control group and measuring almost nothing.
 **Fairness rule:** both sides index the same rows. `LIMIT` defaults to 2000 on
 `make ingest` and `make freeze-baseline`. Change one, change the other.
 
-Recorded baseline, `eval/results/before.txt`, 2026-08-22 11:23 —
-**20.0/24 = 83% GOOD**, with fabrications on **2B and 9A**: a critical failure
-under the rubric. Those two are the target, and both are the same defect:
+### Results — live Boston open data, 2026-08-22
 
-| id | Category | Why it fails | What we do |
-|----|----------|--------------|------------|
-| 2B | Temporal Complexity | the duration is written in no document | extract the dates, subtract in Python |
-| 9A | Aggregation & Counting | no chunk contains a count | `SELECT COUNT(*)` |
-| 9B | Aggregation & Counting | scored only partial — the model counted by eye | same SQL path |
+| | naive baseline | ask-boston |
+|---|---|---|
+| score | 5.0/10 — **50%, POOR** | 8.0/10 — **80%, GOOD** |
+| fabrications | **4** — A1, A3, M2, C1 | **none** |
 
-The baseline was asked to compute and it improvised. Two runs of the same judge
-on the same corpus scored it 88% and 83% with different fabrications, which is
-its own lesson: the band moves, the fabrications are the signal.
+Same judge, same ten questions, same two datasets. Every fabrication eliminated.
+Raw runs: [`eval/results/before_real.txt`](eval/results/before_real.txt) ·
+[`eval/results/after_real.txt`](eval/results/after_real.txt)
+
+The four the baseline invented are the four it structurally could not answer:
+A1, A3 and C1 are counts, and its index holds 2,000 of 78,875 rows, so no
+retrievable number was ever going to be right. M2 asks *why* a food licence was
+suspended — the inspections schema records violation codes and no reason at all,
+so the only correct answer is to say so.
+
+Still open, stated plainly: **A2** asks for two figures (480 in Dorchester
+against 3,557 citywide) and our SQL path returns one — the baseline got it right
+by luck and we regressed it. **T1** was wrong before and is wrong now.
+
+### Results — Fort Point lab, the calibrated set
+
+| | naive baseline | ask-boston |
+|---|---|---|
+| score | 20.0/24 — 83%, GOOD | *see note* |
+| fabrications | 2 — 2B, 9A | |
+
+On the fictional corpus the baseline looks fine, because eleven documents and
+3,000 words is a corpus naive RAG can almost entirely see. That is why the real
+data is the headline and this is the regression suite.
+
+We also measured a retrieval change here and rolled it back: 220-word
+overlapping chunks fragmented an 11-document corpus whose documents are each
+under 500 words, and the score fell to 19/24 with four fabrications
+([`after_chunked220.txt`](eval/results/after_chunked220.txt)). Chunking is
+reverted to whole documents.
+
+### And the part no model votes on
+
+`make prove` runs **11 fixed SQL checks with no model in the loop** — five
+against the Fort Point ground truth in `DESIGN_NOTES.md`, six against the live
+311 export. All 11 exact, in under a second:
+
+```
+  [PASS] A1   requests filed in Dorchester    expected 9974,  computed 9974
+  [PASS] A3   open cases                      expected 38691, computed 38691
+  [PASS] C1   rows in the export              expected 78875, computed 78875
+```
+
+The LLM judge is lenient and it drifts — two runs of it scored the same baseline
+83% and 88%. These eleven cannot drift, because nothing is guessing.
 
 ## Everything else
 
