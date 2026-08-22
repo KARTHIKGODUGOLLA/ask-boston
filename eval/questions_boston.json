@@ -4,7 +4,7 @@
     "category": "Aggregation & Counting",
     "difficulty": "Easy",
     "question": "How many 311 service requests in the export were filed in Dorchester?",
-    "expected_answer": "9,935 — the highest of any Boston neighborhood in this export.",
+    "expected_answer": "9,974 — the highest of any Boston neighborhood in this export.",
     "wrong_answers": [
       "Any count derived from only the rows that happened to be retrieved",
       "A confident round number like 10,000 or 'about 9,000'",
@@ -17,9 +17,9 @@
     "category": "Aggregation & Counting",
     "difficulty": "Medium",
     "question": "How many Rodent Activity reports were filed in Dorchester, and how does that compare to the city total?",
-    "expected_answer": "478 in Dorchester out of 3,535 citywide — roughly 13.5% of all rodent reports.",
+    "expected_answer": "480 in Dorchester out of 3,557 citywide — roughly 13.5% of all rodent reports.",
     "wrong_answers": [
-      "Giving only the citywide 3,535 without the Dorchester breakdown",
+      "Giving only the citywide 3,557 without the Dorchester breakdown",
       "Counting only retrieved chunks instead of the full table",
       "Inventing a percentage that does not follow from the two counts"
     ],
@@ -30,7 +30,7 @@
     "category": "Aggregation & Counting",
     "difficulty": "Medium",
     "question": "How many 311 cases in the export are still open, and how many are closed?",
-    "expected_answer": "38,570 open and 39,956 closed, out of 78,526 total.",
+    "expected_answer": "38,691 open and 40,184 closed, out of 78,875 total.",
     "wrong_answers": [
       "A near-miss count from partial retrieval",
       "Claiming most cases are closed without the near-even split",
@@ -43,7 +43,7 @@
     "category": "Temporal Complexity",
     "difficulty": "Medium",
     "question": "What date range does this 311 export cover, and how many days is that?",
-    "expected_answer": "January 1, 2026 through August 20, 2026 — about 232 days, roughly seven and a half months. The span is not stated in any row; it must be computed from open_dt.",
+    "expected_answer": "January 1, 2026 through August 21, 2026 — about 232 days, roughly seven and a half months. The span is not stated in any row; it must be computed from open_dt.",
     "wrong_answers": [
       "Saying it covers the full year 2026",
       "Quoting a single row's date as the range",
@@ -56,7 +56,7 @@
     "category": "Temporal Complexity",
     "difficulty": "Hard",
     "question": "Are 311 requests being closed on time more often than not?",
-    "expected_answer": "No — 42,797 are OVERDUE against 35,729 ONTIME, so a majority (about 55%) miss their SLA target.",
+    "expected_answer": "No — 43,037 are OVERDUE against 35,838 ONTIME, so a majority (about 55%) miss their SLA target.",
     "wrong_answers": [
       "Assuming most are on time",
       "Answering without the counts behind it",
@@ -95,7 +95,7 @@
     "category": "Domain Confusion",
     "difficulty": "Medium",
     "question": "In this dataset, what is the difference between 'reason' and 'type'?",
-    "expected_answer": "They are two levels of the same taxonomy: 'reason' is the broad category (e.g. Enforcement & Abandoned Vehicles, 44,284 cases) and 'type' is the specific request within it (e.g. Rodent Activity). They are not interchangeable, and counting one as the other inflates or splits totals.",
+    "expected_answer": "They are two levels of the same taxonomy: 'reason' is the broad category (e.g. Enforcement & Abandoned Vehicles, 44,486 cases) and 'type' is the specific request within it (e.g. Rodent Activity). They are not interchangeable, and counting one as the other inflates or splits totals.",
     "wrong_answers": [
       "Treating reason and type as synonyms",
       "Claiming 'reason' explains why the case was opened in a causal sense",
@@ -108,7 +108,7 @@
     "category": "Technical Domain Integration",
     "difficulty": "Hard",
     "question": "Which channel do most 311 requests arrive through, and what does that imply about who is reporting?",
-    "expected_answer": "Employee Generated is the largest source at 44,179, ahead of the Citizens Connect App at 25,122 and Constituent Call at 8,512. A majority of records therefore originate with city staff, not residents — so this dataset is not a clean proxy for citizen complaint volume.",
+    "expected_answer": "Employee Generated is the largest source at 44,372, ahead of the Citizens Connect App at 25,237 and Constituent Call at 8,552. A majority of records therefore originate with city staff, not residents — so this dataset is not a clean proxy for citizen complaint volume.",
     "wrong_answers": [
       "Claiming most requests come from residents or the mobile app",
       "Giving the counts without noting the staff-vs-resident implication",
@@ -121,12 +121,12 @@
     "category": "Contradictory Information",
     "difficulty": "Hard",
     "question": "How many total service requests are in the 311 dataset?",
-    "expected_answer": "78,526 rows in this export, covering Jan 1 - Aug 20, 2026. Note this is a partial-year extract, so it will disagree with any published annual figure — a correct answer states the export's own count and flags that scope difference rather than reconciling silently.",
+    "expected_answer": "78,875 rows in this export, covering Jan 1 - Aug 21, 2026. Note this is a partial-year extract, so it will disagree with any published annual figure — a correct answer states the export's own count and flags that scope difference rather than reconciling silently.",
     "wrong_answers": [
       "Quoting a published annual total (e.g. '100K+ per year') as this file's count",
       "Picking one figure without noting the scope mismatch",
       "Claiming the dataset covers a full year"
     ],
-    "verified_by": "len(df) == 78526"
+    "verified_by": "len(df) == 78875"
   }
 ]

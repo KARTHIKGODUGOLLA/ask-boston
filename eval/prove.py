@@ -50,28 +50,28 @@ CASES = [
 REAL_CASES = [
     ("A1   requests filed in Dorchester",
      """SELECT COUNT(*) FROM t311 WHERE neighborhood = 'Dorchester'""",
-     9935, "the highest of any neighborhood in this export"),
+     9974, "the highest of any neighborhood in this export"),
 
     ("A2   rodent reports in Dorchester",
      """SELECT COUNT(*) FROM t311
         WHERE type = 'Rodent Activity' AND neighborhood = 'Dorchester'""",
-     478, "against 3,535 citywide — about 13.5%"),
+     480, "against 3,557 citywide — about 13.5%"),
 
     ("A2b  rodent reports citywide",
      "SELECT COUNT(*) FROM t311 WHERE type = 'Rodent Activity'",
-     3535, ""),
+     3557, ""),
 
     ("A3   open cases",
      "SELECT COUNT(*) FROM t311 WHERE case_status = 'Open'",
-     38570, "against 39,956 closed"),
+     38691, "against 40,184 closed"),
 
     ("C1   rows in the export",
      "SELECT COUNT(*) FROM t311",
-     78526, "a partial-year extract — Jan 1 to Aug 20 2026, not an annual total"),
+     78875, "a partial-year extract — Jan 1 to Aug 21 2026, not an annual total"),
 
     ("T2   cases missing their SLA target",
      "SELECT COUNT(*) FROM t311 WHERE on_time = 'OVERDUE'",
-     42797, "against 35,729 ONTIME — a majority miss"),
+     43037, "against 35,838 ONTIME — a majority miss"),
 ]
 
 
