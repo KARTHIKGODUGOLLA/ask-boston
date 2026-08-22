@@ -1,4 +1,4 @@
-"""ask-boston: route, compute, then refuse to guess.
+r"""ask-boston: route, compute, then refuse to guess.
 
   question
      |
