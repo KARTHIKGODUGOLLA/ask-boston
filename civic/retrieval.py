@@ -34,6 +34,12 @@ OVERLAP = 60
 TOP_K = 6
 RRF_K = 60
 
+# The real-data suite reads the index that boston/ingest.py builds. Same
+# retrieval code, different store — so one --collection flag switches the
+# whole pipeline between the Fort Point lab and 78k rows of live 311.
+BOSTON_COLLECTION = "boston_open_data"
+BOSTON_CHROMA = str(REPO_ROOT / ".chroma" / "boston")
+
 
 def _chunk(text: str) -> list[str]:
     words = text.split()
@@ -42,6 +48,12 @@ def _chunk(text: str) -> list[str]:
 
 
 def build_index(docs_dir: Path = DOCS_DIR, collection: str = COLLECTION):
+    if collection == BOSTON_COLLECTION:  # built by boston/ingest.py, not here
+        client = chromadb.PersistentClient(path=BOSTON_CHROMA)
+        try:
+            return client.get_collection(BOSTON_COLLECTION)
+        except Exception:
+            raise SystemExit("No Boston index — run `make data` then `make ingest` first.")
     if not any(Path(docs_dir).glob("doc*.md")):
         from baseline.split_corpus import FULL_FOR_DOCS, split
         full = FULL_FOR_DOCS.get(Path(docs_dir).resolve())

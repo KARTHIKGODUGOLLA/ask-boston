@@ -2,6 +2,12 @@
 
 **RAG the City · The Open Accelerator, Boston · August 22, 2026 · Track A — The Engine**
 
+| Who | Owns | Job |
+|---|---|---|
+| Karthik | `civic/router.py`, `civic/tables.py` | Routing + the compute path |
+| TBD | `civic/grounded.py`, `app/` | Abstention + demo surface |
+| TBD | `eval/` | Ground truth and the before/after numbers |
+
 Naive RAG asked an 8B model to count 28 rows of a 311 export. It answered **10**.
 The correct answer is **9**, and every one of those rows was sitting in the retrieved
 context at the time.
@@ -60,15 +66,34 @@ No model was involved. These numbers cannot drift, hallucinate, or miscount.
 
 ## Measured against the baseline
 
-The naive baseline is vendored **unmodified** at `baseline/naive_rag.py`, and
-`eval/judge.py` takes a `--pipeline` argument, so both systems face the identical
-grader, the identical 24 questions and the identical corpus.
+The naive baseline is vendored **unmodified** at `baseline/`, and `eval/judge.py`
+takes a `--pipeline` argument, so both systems face the identical grader, the
+identical questions and the identical corpus.
+
+Two suites, two jobs — see `eval/README.md`:
+
+| suite | n | ground truth | proves |
+|---|---|---|---|
+| Fort Point | 24 | hand-counted in `DESIGN_NOTES.md`, with distractors | we beat naive RAG on a set that cannot move |
+| Real 311 | 10 | computed in pandas, `verified_by` recorded per question | it works on the data we actually submit |
 
 ```bash
-make score-before      # baseline    -> eval/results/before.txt
-make score-after       # ask-boston  -> eval/results/after.txt
-make compare           # side by side, per question
+make score-before && make score-after            # Fort Point, 24 questions
+make freeze-baseline && make ingest              # once, then freely
+make score-before-real && make score-after-real  # real 311, 10 questions
+make compare                                     # both, per question
 ```
+
+### Two indexes, on purpose
+
+`.chroma/baseline` is built once by `make freeze-baseline` and **never rebuilt**.
+`boston/ingest.py` deletes and recreates its collection every run, so if the
+control group shared that store, improving our chunking would improve the
+baseline too — and since most of our gain comes from ingestion, we would be
+handing our best work to the control group and measuring almost nothing.
+
+**Fairness rule:** both sides index the same rows. `LIMIT` defaults to 2000 on
+`make ingest` and `make freeze-baseline`. Change one, change the other.
 
 Recorded baseline: **21.0/24 = 88% GOOD**, with fabrications on **2B, 4B, 9A** —
 a critical failure under the rubric. Those three are the target:
@@ -102,10 +127,13 @@ civic/          our work
   pipeline.py     orchestration; baseline-compatible retrieve()/generate()
   llm.py          one place that knows how to reach a model
 eval/
-  prove.py        no-LLM proof of the computed answers
-  judge.py        the starter's judge, with --pipeline
-  compare.py      before vs after
-baseline/       the naive pipeline, unmodified — this is "before"
+  prove.py            no-LLM proof of the computed answers, both suites
+  judge.py            the starter's judge, with --pipeline
+  compare.py          before vs after
+  questions_boston.json   10 real-data questions, ground truth verified in pandas
+  README.md           how the measurement works, and how not to break it
+baseline/       the control group — naive_rag.py (Fort Point), naive_boston.py
+                (real CSVs), freeze.py. Do not fix these
 boston/         Analyze Boston download / ingest / query
 lab0_boston/    corpus, 24 eval questions, design notes — unmodified
 app/            Streamlit demo surface
@@ -117,7 +145,9 @@ docs/           FIELD_MANUAL.md, DEMO_SCRIPT.md, SUBMISSION.md
 From [Analyze Boston](https://data.boston.gov), resolved live through the CKAN API so
 the links never rot:
 
-1. **311 Service Requests** — the aggregation and multilingual surface
+1. **311 Service Requests** — 78,526 rows, Jan 1 – Aug 20 2026. The aggregation
+   and multilingual surface. Ground truth in `eval/questions_boston.json` is pinned
+   to this download; re-downloading invalidates it (`make prove` catches that)
 2. **Food Establishment Inspections** — coded violations with no narrative cause, so
    "why?" questions are correctly unanswerable
 3. **Operating Budget** — pairs with the narrative PDF; the contradiction case

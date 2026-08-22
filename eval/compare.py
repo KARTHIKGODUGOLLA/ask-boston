@@ -25,9 +25,16 @@ def load(path: Path) -> tuple[dict[str, str], tuple[str, str, str], str]:
 
 
 def main() -> None:
-    before, btot, bfab = load(RESULTS / "before.txt")
-    after, atot, afab = load(RESULTS / "after.txt")
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--before", type=Path, default=RESULTS / "before.txt")
+    ap.add_argument("--after", type=Path, default=RESULTS / "after.txt")
+    args = ap.parse_args()
 
+    before, btot, bfab = load(args.before)
+    after, atot, afab = load(args.after)
+
+    print(f"{args.before.stem} vs {args.after.stem}")
     print(f"{'id':<5}{'baseline':<20}{'ask-boston':<20}")
     print("-" * 45)
     changed = 0

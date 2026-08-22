@@ -23,5 +23,13 @@ Inspired by and calibrated against the Millbrook City RAG Challenge
   AI-generated synthetic data. The Millbrook corpus itself is NOT
   redistributed here.
 
-Original work in this repository (civic/, eval/judge.py modifications,
-app/, docs/) is Apache-2.0, same as the starter.
+Merged in from our own earlier scaffold ("i-dont-know", same authors):
+  eval/questions_boston.json — 10 evaluation questions over the real 311
+    export, each with ground truth computed in pandas and the expression
+    recorded in `verified_by`
+  the frozen-control-group design (baseline/freeze.py, baseline/naive_boston.py)
+    and the LIMIT fairness rule
+
+Original work in this repository (civic/, eval/, app/, docs/, and the
+--pipeline modification to the starter's judge) is Apache-2.0, same as the
+starter.

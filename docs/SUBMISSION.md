@@ -20,7 +20,8 @@ Code freeze is 3:15. Round 1 demos start at 3:30. After 3:15 you rehearse, you d
 |------|---------|
 | 9:30 | doors. `make setup`, `make data`, `make prove` — confirm green on every laptop |
 | 10:30 | matchmaking if you still need people |
-| 10:45 | **track locks.** `make score-before \| tee eval/results/before.txt` — this number is your left column |
+| 10:45 | **track locks.** `make score-before` — saves to eval/results/before.txt. This number is your left column |
+| 10:50 | `make freeze-baseline` ONCE, then `make ingest`. Same LIMIT on both, or the comparison is worthless |
 | 11:00 | build. router first, then tables, then the gate |
 | 13:30 | first full `make score-after`. Whatever it says, you now have a real result |
 | 14:15 | last code change worth making. Then `make score-after` again and `make compare` |
@@ -35,6 +36,9 @@ Code freeze is 3:15. Round 1 demos start at 3:30. After 3:15 you rehearse, you d
 - [ ] `make prove` passes on a fresh clone
 - [ ] README's baseline numbers match what actually ran today
 - [ ] `NOTICE` is intact — the starter is Apache-2.0 and the corpus is someone's work
+- [ ] `make prove` still passes on the REAL data. If only those cases fail, the
+      311 CSV grew since the ground truth was verified — re-verify in pandas and
+      update `eval/questions_boston.json`. Never edit the SQL to match
 
 ## Guard rails
 
