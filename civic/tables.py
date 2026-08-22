@@ -91,7 +91,10 @@ def _frames() -> dict[str, pd.DataFrame]:
             df = pd.read_csv(path, nrows=REAL_CSV_ROWS, low_memory=False)
         except Exception:
             continue
-        frames[re.sub(r"[^a-z0-9]+", "_", path.stem.lower()).strip("_")] = df
+        name = re.sub(r"[^a-z0-9]+", "_", path.stem.lower()).strip("_")
+        if name[:1].isdigit():
+            name = "t" + name  # SQL identifiers cannot start with a digit
+        frames[name] = df
 
     _CACHE = frames
     return frames

@@ -95,14 +95,19 @@ handing our best work to the control group and measuring almost nothing.
 **Fairness rule:** both sides index the same rows. `LIMIT` defaults to 2000 on
 `make ingest` and `make freeze-baseline`. Change one, change the other.
 
-Recorded baseline: **21.0/24 = 88% GOOD**, with fabrications on **2B, 4B, 9A** —
-a critical failure under the rubric. Those three are the target:
+Recorded baseline, `eval/results/before.txt`, 2026-08-22 11:23 —
+**20.0/24 = 83% GOOD**, with fabrications on **2B and 9A**: a critical failure
+under the rubric. Those two are the target, and both are the same defect:
 
 | id | Category | Why it fails | What we do |
 |----|----------|--------------|------------|
-| 2B | Temporal Complexity | duration written in no document | extract dates, subtract in Python |
-| 4B | Missing Context | the corpus deliberately omits the answer | evidence audit → abstain |
+| 2B | Temporal Complexity | the duration is written in no document | extract the dates, subtract in Python |
 | 9A | Aggregation & Counting | no chunk contains a count | `SELECT COUNT(*)` |
+| 9B | Aggregation & Counting | scored only partial — the model counted by eye | same SQL path |
+
+The baseline was asked to compute and it improvised. Two runs of the same judge
+on the same corpus scored it 88% and 83% with different fabrications, which is
+its own lesson: the band moves, the fabrications are the signal.
 
 ## Everything else
 

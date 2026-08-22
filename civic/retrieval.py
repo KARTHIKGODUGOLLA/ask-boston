@@ -29,8 +29,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = REPO_ROOT / "lab0_boston" / "corpus" / "docs"
 CHROMA_DIR = str(REPO_ROOT / ".chroma" / "civic")
 COLLECTION = "fortpoint_civic"      # NOT fortpoint_naive — baseline index stays intact
-CHUNK_WORDS = 220
-OVERLAP = 60
+CHUNK_WORDS = 700   # every Fort Point doc is <500 words: keep each one WHOLE
+OVERLAP = 0         # 220/60 fragmented them and the model filled the gaps
 TOP_K = 6
 RRF_K = 60
 

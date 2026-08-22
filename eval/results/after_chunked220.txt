@@ -1,0 +1,41 @@
+PIPELINE: civic.pipeline    COLLECTION: fortpoint_civic
+RUN AT:   2026-08-22T11:49:33
+
+  [ 1/24] 1A correct           Two people named Fitzgerald appear in the bridge doc
+  [ 2/24] 1B correct           A person listed as 'C. Peña' gave public comment at 
+  [ 3/24] 1C fabricated        Two food establishments are located in Fort Point it
+  [ 4/24] 2A correct           How long had the Northern Avenue Bridge been closed 
+  [ 5/24] 2B correct           How long has Yolanda Peña been running Gull & Anchor
+  [ 6/24] 2C correct           When did Deirdre Fitzgerald found Harborline Structu
+  [ 7/24] 3A partially_correct How much does the FY2027 budget commit to design and
+  [ 8/24] 3B partially_correct How long is bridge construction expected to take onc
+  [ 9/24] 3C correct           What is the estimated total cost of rehabilitating t
+  [10/24] 4A correct           What caused the walk-in cooler problem that led to G
+  [11/24] 4B correct           What did Wilner Joseph do for work before launching 
+  [12/24] 4C correct           What happened to Camila Peña's father?
+  [13/24] 5A correct           What does Deirdre Fitzgerald's PE credential allow h
+  [14/24] 5B fabricated        What does Chapter 91 License No. 15288 in the proper
+  [15/24] 5C correct           The assessment gives the bridge's swing span a condi
+  [16/24] 6A correct           What connects Councilor Declan Fitzgerald to the fir
+  [17/24] 6B correct           Trace every connection between Camila Peña and the N
+  [18/24] 6C fabricated        How many degrees of separation lie between Wilner Jo
+  [19/24] 7A fabricated        Which languages other than English appear in the com
+  [20/24] 7B correct           What did Wilner Joseph actually say in Haitian Creol
+  [21/24] 8A correct           What specific structural findings support the pedest
+  [22/24] 8B correct           Which patterns in the 311 export corroborate the eng
+  [23/24] 9A correct           How many service requests in the 311 export excerpt 
+  [24/24] 9B correct           How many 311 requests in the export excerpt were sub
+
+PER-CATEGORY RESULTS
+  Aggregation & Counting                    2.0 / 2
+  Ambiguous References                      2.0 / 3
+  Contradictory Information                 2.0 / 3
+  Domain Confusion                          2.0 / 3
+  Missing Context Scenarios                 3.0 / 3
+  Multilingual And Cultural Complexity      1.0 / 2
+  Relationship Complexity                   2.0 / 3
+  Technical Domain Integration              2.0 / 2
+  Temporal Complexity                       3.0 / 3
+
+TOTAL: 19.0 / 24  ->  79%   BAND: GOOD (75-89)
+FABRICATIONS: 1C, 5B, 6C, 7A   <-- CRITICAL FAILURE
