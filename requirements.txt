@@ -1,0 +1,15 @@
+# ask-boston — shared base (inherited from the RAG the City starter)
+chromadb
+langchain
+langchain-community
+langchain-ollama
+langchain-text-splitters
+rank_bm25
+pandas
+requests
+streamlit
+folium
+plotly
+
+# ask-boston additions
+duckdb          # tables stay tables: counting and date math run as SQL

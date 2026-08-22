@@ -1,0 +1,27 @@
+ask-boston
+==========
+
+Built for RAG the City, The Open Accelerator, Boston — August 22, 2026.
+
+Derived from the official starter repository:
+  rag-the-city-starter — https://github.com/holzerjm/rag-the-city-starter
+  Licensed Apache-2.0. Copied and modified here:
+    baseline/naive_rag.py, baseline/split_corpus.py  (unmodified; kept as
+      the measurement baseline)
+    boston/download.py, boston/ingest.py, boston/query.py
+    civic/_hybrid_reference.py  (from track_a_engine/hybrid_search.py)
+    eval/judge.py  (from lab0_millbrook/judge.py; modified to accept a
+      --pipeline argument so any system can be graded)
+    lab0_boston/  (corpus, eval questions, design notes — unmodified)
+
+Lab 0 corpus, "The Fort Point Files": a work of fiction created for RAG
+education. Characters, businesses, documents and all numbers are invented;
+Boston place names are used fictitiously.
+
+Inspired by and calibrated against the Millbrook City RAG Challenge
+  (c) William Caban — used with permission. All content fictional,
+  AI-generated synthetic data. The Millbrook corpus itself is NOT
+  redistributed here.
+
+Original work in this repository (civic/, eval/judge.py modifications,
+app/, docs/) is Apache-2.0, same as the starter.

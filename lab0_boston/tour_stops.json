@@ -1,0 +1,91 @@
+{
+  "title": "LAB 0 — THE FORT POINT FILES",
+  "intro": "The Northern Avenue Bridge — real, built 1908, and fenced off since December 2014 — wrapped in a fictional 2026 reopening study told in eleven documents shaped like Saturday's Analyze Boston data. Six stops; each breaks the naive baseline a different way. The Fort Point Files is a work of fiction created for RAG education. Characters, businesses, documents, and all numbers are invented; Boston place names are used fictitiously. Inspired by the Millbrook City RAG Challenge by William Caban (used with permission).",
+  "shape_label": "THIS IS SATURDAY'S DATA SHAPE",
+  "outro": [
+    "Also hiding in this corpus: domain confusion ('PE' = Professional",
+    "Engineer; Chapter 91 = a waterways license, not a business license; a",
+    "condition rating of 2 is critical, not good) and genuine Spanish /",
+    "Haitian Creole / Chinese spans — Boston's actual 311 languages."
+  ],
+  "next_steps": [
+    "Next: make lab0-score  — judge all 24 questions across 9 categories.",
+    "Origin: make lab0-millbrook  — the Millbrook challenge this lab was rebuilt from.",
+    "Your goal Saturday is EXCELLENT — pick which failure you'll kill first."
+  ],
+  "stops": [
+    {
+      "stop": 1,
+      "ids": ["warm-up", "1B"],
+      "questions": [
+        "When did the Northern Avenue Bridge close to all users?",
+        "A person listed as 'C. Peña' gave public comment at the May 19 council committee meeting. Which Peña was it, and how is she related to the owner of Gull & Anchor Bakery?"
+      ],
+      "failure": "The warm-up works: the December 2014 closure sits inside a single chunk of both the engineering assessment ('closed to all users in December 2014') and the newspaper article ('fenced off from everyone since December 2014'), and naive RAG is fine at single-chunk facts. Then it merges the Peñas. The minutes record only 'C. Peña', and every chunk mentioning a Peña scores high — Yolanda's bio, her diary, the Roundtable transcript. Embedding similarity cannot tell a 17-year-old co-op intern from her mother the bakery owner; similarity is not identity.",
+      "expected": "Camila Peña — Yolanda's 17-year-old daughter, a school-year co-op intern at Harborline Structural Group — gave the City Hall comment recorded as 'C. Peña'. Yolanda spoke later, at the June 10 Roundtable, not at the committee.",
+      "data_shape": "The real 311 export and permit records repeat names and street names endlessly — same string, different people and places. A retriever that matches on the string alone merges them, exactly like this.",
+      "rubric_tie": "RAG Quality & Grounding /4",
+      "ask_command": "make lab0-ask Q=\"Which Peña gave public comment at the May 19 committee meeting?\""
+    },
+    {
+      "stop": 2,
+      "ids": ["2A"],
+      "questions": [
+        "How long had the Northern Avenue Bridge been closed to all users when the 2026 condition assessment was submitted, and when did it close to vehicles?"
+      ],
+      "failure": "The elapsed time — about eleven and a half years — appears in NO chunk. The corpus holds the two closure dates (vehicles in 1997, everyone in December 2014) and the assessment's submission date (May 11, 2026) in separate documents. Retrieval returns date-bearing text, but a naive pipeline never anchors 'now' and never does the subtraction — and it happily counts from the wrong closure date, 1997.",
+      "expected": "Closed to all users in December 2014 — about 11 and a half years by the May 11, 2026 assessment — and closed to vehicular traffic back in 1997. No document states the elapsed time; it must be computed from the dates.",
+      "data_shape": "Every temporal question over Saturday's data works this way: 'Is crime in Roxbury getting better or worse over the last 3 years?' is computed across the crime CSV's dates — the trend is stored in no row.",
+      "rubric_tie": "Track A: Temporal RAG",
+      "ask_command": "make lab0-ask Q=\"How long had the bridge been closed to all users when the 2026 assessment was submitted?\""
+    },
+    {
+      "stop": 3,
+      "ids": ["3A"],
+      "questions": [
+        "How much does the FY2027 budget commit to design and engineering for the Northern Avenue Bridge rehabilitation?"
+      ],
+      "failure": "The corpus holds BOTH numbers: the operating-budget CSV carries a $4,200,000 FY2027 appropriation on the Design & Engineering line, while the budget narrative commits '$3.65 million' to the same work. Every other line item agrees across the two documents, so the single disagreement is the trap — and top-k retrieval surfaces whichever figure embeds closer to your phrasing. The baseline confidently returns ONE, never knowing the other exists.",
+      "expected": "The sources disagree — $4,200,000 in the budget CSV vs $3.65 million in the narrative. A correct answer surfaces both figures and flags the conflict instead of picking one or merging them.",
+      "data_shape": "Saturday's real Operating Budget ships as exactly this pair on data.boston.gov — a machine-readable CSV and a narrative document. When they disagree on a line item, which source wins, and how would your system know?",
+      "rubric_tie": "RAG Quality & Grounding + Multi-Source",
+      "ask_command": "make lab0-ask Q=\"How much does the FY2027 budget commit to design and engineering for the bridge rehabilitation?\""
+    },
+    {
+      "stop": 4,
+      "ids": ["4A"],
+      "questions": [
+        "What caused the walk-in cooler problem that led to Gull & Anchor Bakery's failed inspection in January 2026?"
+      ],
+      "failure": "The baseline invents a cause. The inspection report holds coded violations only — a critical 02-201 (potentially hazardous food above 41°F, walk-in cooler at 49°F), two non-critical citations, the January 21 suspension, and the passed January 24 re-inspection. NO document explains what went wrong with the cooler. Retrieval always returns something topically adjacent, the generator fills the gap, and the rubric calls that fabrication a CRITICAL FAILURE.",
+      "expected": "The documents don't say. The report records the coded violations, the suspension, and the passed re-inspection — and no cause anywhere. The right answer is grounded abstention: 'the data doesn't say.'",
+      "data_shape": "The real Food Establishment Inspections dataset is this shape exactly: violation codes and dispositions, no narrative reasons. Saying 'I don't know' is a feature you have to build.",
+      "rubric_tie": "RAG Quality /4 anchor: says 'I don't know' instead of guessing",
+      "ask_command": "make lab0-ask Q=\"What caused the walk-in cooler problem behind Gull & Anchor Bakery's failed inspection?\""
+    },
+    {
+      "stop": 5,
+      "ids": ["6C"],
+      "questions": [
+        "How many degrees of separation lie between Wilner Joseph and Deirdre Fitzgerald, and by what paths?"
+      ],
+      "failure": "No chunk contains the path. The two are one step apart — both took part in the June 10 Roundtable, and Joseph's written testimony was entered at the May 19 committee meeting where Fitzgerald presented — with a longer chain through the property record: his water taxi berths at the float behind 486 Congress Street, owned by Meridian Wharf Holdings, whose café hosted the Roundtable. Each hop lives in a different document genre — transcript, minutes, property record — and similarity search cannot chain edges. This needs an entity graph.",
+      "expected": "One step at minimum, via the shared June 10 Roundtable and his written testimony at the May 19 committee where she presented; a longer path runs through the 486 Congress Street float, Meridian Wharf Holdings, and Priya Raman's café.",
+      "data_shape": "Property owner → violations → permits → neighborhood patterns: Saturday's datasets join on parcel IDs, owner names, and addresses, and every hop lives in a different CSV.",
+      "rubric_tie": "Track A: Graph / Agentic RAG",
+      "ask_command": "make lab0-ask Q=\"How many degrees of separation lie between Wilner Joseph and Deirdre Fitzgerald?\""
+    },
+    {
+      "stop": 6,
+      "ids": ["9A"],
+      "questions": [
+        "How many service requests in the 311 export excerpt list a location on or at the Northern Avenue Bridge?"
+      ],
+      "failure": "No chunk contains a count. The answer — 9 — exists only by iterating the table: 3 trespassing on the closed structure, 2 barrier/fence damage, 2 debris in waterway, 1 streetlight outage on the approach, 1 graffiti report on the abutment, scattered among 28 rows of CSV that the embedder treats as one undifferentiated wall of text. The baseline eyeballs the wall and returns a confident near-miss — and a confident wrong count is a fabrication. This is the finale Millbrook doesn't have: the Fort Point edition's ninth category, Aggregation & Counting.",
+      "expected": "9 of the 28 rows list a location on or at the Northern Avenue Bridge — 3 trespassing, 2 barrier/fence damage, 2 debris in waterway, 1 streetlight outage, 1 graffiti report.",
+      "data_shape": "'How many?' is the first question every citizen asks of the real 311 CSV, and no chunk of a CSV contains a count — at Saturday's scale the table won't even fit in one chunk. Aggregation needs structured retrieval: row-aware chunking, metadata filters, or handing the table to code instead of an embedder.",
+      "rubric_tie": "RAG Quality & Grounding /4 — a confident wrong count is a fabrication",
+      "ask_command": "make lab0-ask Q=\"How many 311 requests list a location on or at the Northern Avenue Bridge?\""
+    }
+  ]
+}

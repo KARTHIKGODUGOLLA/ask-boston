@@ -1,0 +1,290 @@
+[
+  {
+    "id": "1A",
+    "category": "Ambiguous References",
+    "difficulty": "Medium",
+    "question": "Two people named Fitzgerald appear in the bridge documents. Who are they, and what role did each play at the May 2026 committee meeting?",
+    "expected_answer": "Deirdre Fitzgerald, PE, principal of Harborline Structural Group, presented the condition assessment. Declan Fitzgerald is the District 2 city councilor and her brother — he disclosed the relationship and recused himself from deliberation and the vote.",
+    "wrong_answers": [
+      "Treating the two Fitzgeralds as one person",
+      "Saying Councilor Fitzgerald presented the engineering findings",
+      "Missing the disclosure and recusal"
+    ]
+  },
+  {
+    "id": "1B",
+    "category": "Ambiguous References",
+    "difficulty": "Hard",
+    "question": "A person listed as 'C. Peña' gave public comment at the May 19 council committee meeting. Which Peña was it, and how is she related to the owner of Gull & Anchor Bakery?",
+    "expected_answer": "Camila Peña, the 17-year-old daughter of bakery owner Yolanda Peña, gave the City Hall public comment (the minutes record 'C. Peña'). Yolanda spoke later at the June 10 community meeting, not at the committee.",
+    "wrong_answers": [
+      "Saying Yolanda Peña addressed the committee",
+      "Treating Camila and Yolanda as the same person",
+      "Claiming no relationship between the two is established"
+    ]
+  },
+  {
+    "id": "1C",
+    "category": "Ambiguous References",
+    "difficulty": "Medium",
+    "question": "Two food establishments are located in Fort Point itself. What are their names, who runs them, and which one was inspected in January 2026?",
+    "expected_answer": "Gull & Anchor Bakery (47 Sleeper Street), run by Yolanda Peña — the establishment inspected on January 21, 2026 — and Meridian Wharf Café (486 Congress Street), run by Priya Raman.",
+    "wrong_answers": [
+      "Identifying only one of the two businesses",
+      "Swapping the operators",
+      "Saying Meridian Wharf Café was the inspected establishment"
+    ]
+  },
+  {
+    "id": "2A",
+    "category": "Temporal Complexity",
+    "difficulty": "Hard",
+    "question": "How long had the Northern Avenue Bridge been closed to all users when the 2026 condition assessment was submitted, and when did it close to vehicles?",
+    "expected_answer": "It closed to all users in December 2014, so about 11 and a half years by the May 11, 2026 assessment; it had already closed to vehicular traffic in 1997. No document states the elapsed time — it must be computed from the two dates.",
+    "wrong_answers": [
+      "Counting from the 1997 vehicular closure instead of December 2014",
+      "Saying it has been closed since it opened in 1908",
+      "Giving one duration without distinguishing the two closure dates"
+    ]
+  },
+  {
+    "id": "2B",
+    "category": "Temporal Complexity",
+    "difficulty": "Medium",
+    "question": "How long has Yolanda Peña been running Gull & Anchor Bakery?",
+    "expected_answer": "About 15 years — she opened it in March 2011 and the most recent documents are dated mid-2026. No document states the duration; it requires date arithmetic across documents.",
+    "wrong_answers": [
+      "Saying 8 years by confusing it with Meridian Wharf Café's 2018 opening",
+      "Counting from her 2004 arrival in Boston (about 22 years)",
+      "Claiming the duration is stated directly in a document"
+    ]
+  },
+  {
+    "id": "2C",
+    "category": "Temporal Complexity",
+    "difficulty": "Medium",
+    "question": "When did Deirdre Fitzgerald found Harborline Structural Group, and how long had she worked in the City of Boston Bridge Operations Division before that?",
+    "expected_answer": "She founded Harborline Structural Group in 2019, after joining the City of Boston Bridge Operations Division in 2009 — ten years of city service before founding the firm. The ten-year span is computed, not stated.",
+    "wrong_answers": [
+      "Confusing the 2019 founding with the 2026 assessment date",
+      "Wrong arithmetic on the span of city service",
+      "Attributing the city engineering career to Declan Fitzgerald"
+    ]
+  },
+  {
+    "id": "3A",
+    "category": "Contradictory Information",
+    "difficulty": "Hard",
+    "question": "How much does the FY2027 budget commit to design and engineering for the Northern Avenue Bridge rehabilitation?",
+    "expected_answer": "The sources disagree: the operating-budget CSV extract carries a $4,200,000 FY2027 appropriation on the Design & Engineering line, while the budget narrative commits '$3.65 million' to the same work. A correct answer surfaces both figures and flags the conflict.",
+    "wrong_answers": [
+      "$4,200,000 with no mention of the narrative's figure",
+      "$3.65 million with no mention of the CSV's figure",
+      "Averaging or otherwise merging the two numbers into one"
+    ]
+  },
+  {
+    "id": "3B",
+    "category": "Contradictory Information",
+    "difficulty": "Medium",
+    "question": "How long is bridge construction expected to take once work begins?",
+    "expected_answer": "The engineering assessment (echoed in the committee minutes) says approximately 30 months from notice to proceed, but Commissioner Althea Grady is quoted in The Channel Current saying people will be walking across 'within two years of breaking ground' — 24 months. The sources disagree.",
+    "wrong_answers": [
+      "Citing only the 30-month engineering figure",
+      "Citing only the commissioner's two-year quote",
+      "Not recognizing that the two durations conflict"
+    ]
+  },
+  {
+    "id": "3C",
+    "category": "Contradictory Information",
+    "difficulty": "Hard",
+    "question": "What is the estimated total cost of rehabilitating the Northern Avenue Bridge?",
+    "expected_answer": "Two figures appear: $95 million in 2024 dollars (engineering assessment, repeated in the committee minutes) and $110 million once escalation and contingency are folded in (The Channel Current). A correct answer reports both with their basis.",
+    "wrong_answers": [
+      "Reporting only the $95 million figure",
+      "Reporting only the $110 million figure",
+      "Treating the two as independent competing estimates without the escalation-and-contingency context"
+    ]
+  },
+  {
+    "id": "4A",
+    "category": "Missing Context Scenarios",
+    "difficulty": "Medium",
+    "question": "What caused the walk-in cooler problem that led to Gull & Anchor Bakery's failed inspection in January 2026?",
+    "expected_answer": "The documents don't say. The inspection report records a critical coded violation — potentially hazardous food held above 41°F, walk-in cooler at 49°F — plus two non-critical violations, a suspension on January 21, and a passed re-inspection on January 24, but no document explains what caused the cooler problem.",
+    "wrong_answers": [
+      "Inventing a mechanical cause such as a failed compressor",
+      "Claiming the report contains a narrative explanation",
+      "Saying no inspection information exists at all"
+    ]
+  },
+  {
+    "id": "4B",
+    "category": "Missing Context Scenarios",
+    "difficulty": "Hard",
+    "question": "What did Wilner Joseph do for work before launching Seaport Skiff Water Taxi in 2021?",
+    "expected_answer": "The documents say he arrived in Boston from Port-au-Prince in 2010 and launched the water taxi in May 2021, but they never say what he did in between. The grounded answer is that his prior work is not stated.",
+    "wrong_answers": [
+      "Fabricating a prior career such as fisherman or ferry deckhand",
+      "Claiming the documents contain no information about him at all",
+      "Confusing his 2010 arrival year with the taxi's launch year"
+    ]
+  },
+  {
+    "id": "4C",
+    "category": "Missing Context Scenarios",
+    "difficulty": "Medium",
+    "question": "What happened to Camila Peña's father?",
+    "expected_answer": "The diary indicates Yolanda Peña is widowed — Aurelio has died — but no document gives any detail about when or how. The correct answer states that he is deceased and abstains beyond that.",
+    "wrong_answers": [
+      "Inventing a cause or date of death",
+      "Claiming the documents never mention a father",
+      "Confusing Aurelio with another character"
+    ]
+  },
+  {
+    "id": "5A",
+    "category": "Domain Confusion",
+    "difficulty": "Medium",
+    "question": "What does Deirdre Fitzgerald's PE credential allow her to do?",
+    "expected_answer": "PE is a Professional Engineer license — Massachusetts License #48291 — allowing her to practice engineering and take responsible charge of work like the bridge condition assessment. It has nothing to do with physical education.",
+    "wrong_answers": [
+      "Interpreting PE as physical education",
+      "Confusing the license number with a building permit number",
+      "Saying PE is a company job title rather than a state license"
+    ]
+  },
+  {
+    "id": "5B",
+    "category": "Domain Confusion",
+    "difficulty": "Hard",
+    "question": "What does Chapter 91 License No. 15288 in the property record authorize?",
+    "expected_answer": "It is a Massachusetts Public Waterfront Act (M.G.L. c. 91) waterways license held by Meridian Wharf Holdings LLC, authorizing a seasonal float and gangway on the Fort Point Channel behind 486 Congress Street — a tidelands/waterways authorization, not a business, food, or liquor license.",
+    "wrong_answers": [
+      "Treating it as a business or liquor license for the café",
+      "Treating Chapter 91 as a chapter of the building code",
+      "Saying it licenses the water taxi company itself"
+    ]
+  },
+  {
+    "id": "5C",
+    "category": "Domain Confusion",
+    "difficulty": "Medium",
+    "question": "The assessment gives the bridge's swing span a condition rating of 2. Is that a good score?",
+    "expected_answer": "No — it is on the federal NBI 0–9 condition scale, where lower is worse; 2 means 'critical'. It is not a stars-style or percentage-style score where a low number might read as merely below average.",
+    "wrong_answers": [
+      "Reading the 2 as acceptable or average",
+      "Treating it as 2 out of 5 stars",
+      "Confusing the condition rating with a count of load restrictions"
+    ]
+  },
+  {
+    "id": "6A",
+    "category": "Relationship Complexity",
+    "difficulty": "Hard",
+    "question": "What connects Councilor Declan Fitzgerald to the firm that wrote the bridge condition assessment, and what did he do about it?",
+    "expected_answer": "The assessment was authored by Harborline Structural Group, whose principal, Deirdre Fitzgerald, is his sister. At the May 19 committee meeting he disclosed the relationship and recused himself from deliberation and the vote on Docket #0457.",
+    "wrong_answers": [
+      "Finding no connection between the councilor and the firm",
+      "Saying he participated in the vote anyway",
+      "Confusing which sibling is the engineer"
+    ]
+  },
+  {
+    "id": "6B",
+    "category": "Relationship Complexity",
+    "difficulty": "Hard",
+    "question": "Trace every connection between Camila Peña and the Northern Avenue Bridge project.",
+    "expected_answer": "Camila is Yolanda Peña's daughter and a school-year co-op intern at Harborline Structural Group — the firm that wrote the condition assessment under Deirdre Fitzgerald. She gave public comment at the May 19 committee meeting ('C. Peña'), asked about deck benches and shade at the June 10 Roundtable, and her mother's bakery depends on the bridge's foot traffic.",
+    "wrong_answers": [
+      "Only identifying her as the bakery owner's daughter",
+      "Missing the Harborline internship link",
+      "Attributing her City Hall comment to Yolanda"
+    ]
+  },
+  {
+    "id": "6C",
+    "category": "Relationship Complexity",
+    "difficulty": "Hard",
+    "question": "How many degrees of separation lie between Wilner Joseph and Deirdre Fitzgerald, and by what paths?",
+    "expected_answer": "One step at minimum: both took part in the June 10 Roundtable at Meridian Wharf Café, where Fitzgerald presented and Joseph testified in Haitian Creole; his written testimony was also entered at the May 19 committee meeting where she presented. A longer path runs through property: Joseph berths at the Meridian Wharf Holdings float behind 486 Congress Street (Priya Raman), whose café hosted the Roundtable.",
+    "wrong_answers": [
+      "Claiming no path exists between them",
+      "Finding only the property-chain path and missing the shared meetings",
+      "Inventing a family or employment relationship between them"
+    ]
+  },
+  {
+    "id": "7A",
+    "category": "Multilingual And Cultural Complexity",
+    "difficulty": "Medium",
+    "question": "Which languages other than English appear in the community-meeting transcript, and who spoke each?",
+    "expected_answer": "Spanish (Yolanda Peña), Haitian Creole (Wilner Joseph), and Chinese (Grace Yuen, code-switching with English); a city interpreter provided brief English summaries for the Spanish and Creole remarks.",
+    "wrong_answers": [
+      "Missing one of the three languages",
+      "Attributing the Haitian Creole remarks to Grace Yuen",
+      "Claiming the transcript is entirely in English"
+    ]
+  },
+  {
+    "id": "7B",
+    "category": "Multilingual And Cultural Complexity",
+    "difficulty": "Hard",
+    "question": "What did Wilner Joseph actually say in Haitian Creole at the June 10 meeting, and what detail does the interpreter's summary leave out?",
+    "expected_answer": "He said that since January he has had to move his landing float twice because of debris falling from the bridge, and that someone could get hurt if the barriers are not fixed ('Depi mwa janvye, mwen oblije deplase pontonn mwen an de fwa…'). The interpreter's summary mentions only general safety concerns about debris — it omits that he moved the float twice and that it has been happening since January.",
+    "wrong_answers": [
+      "Answering only from the interpreter's vague summary",
+      "Saying he complained about losing riders or revenue",
+      "Misidentifying the language as French"
+    ]
+  },
+  {
+    "id": "8A",
+    "category": "Technical Domain Integration",
+    "difficulty": "Hard",
+    "question": "What specific structural findings support the pedestrian-and-cyclist-only recommendation, and how did they shape the committee's action?",
+    "expected_answer": "The assessment records a swing-span condition rating of 2 (critical) on the NBI 0–9 scale, up to 60 percent section loss in floor-beam bottom flanges, fatigue cracking at six riveted lower-chord connections, and 1.4 meters of scour at the turntable pier. On those findings it recommends a pedestrian- and cyclist-only rehabilitation ($95M in 2024 dollars, about 30 months of construction), which the committee cited in voting 4–0 with one recusal to advance the FY2027 design appropriation.",
+    "wrong_answers": [
+      "Citing only general deterioration without the specific findings",
+      "Not connecting the engineering findings to the committee vote",
+      "Mixing in the newspaper's $110 million as an assessment finding"
+    ]
+  },
+  {
+    "id": "8B",
+    "category": "Technical Domain Integration",
+    "difficulty": "Medium",
+    "question": "Which patterns in the 311 export corroborate the engineering assessment's public-safety findings about the closed bridge?",
+    "expected_answer": "The export's bridge rows repeat what the assessment observed in the field: three trespassing-on-closed-structure reports and two barrier/fence-damage reports match the breached perimeter fencing and recurring unauthorized access, and two debris-in-waterway reports match the fender timbers actively shedding debris into the channel.",
+    "wrong_answers": [
+      "Treating the 311 rows and the assessment as unrelated sources",
+      "Citing only one report type instead of the pattern",
+      "Attributing the debris reports to construction work"
+    ]
+  },
+  {
+    "id": "9A",
+    "category": "Aggregation & Counting",
+    "difficulty": "Medium",
+    "question": "How many service requests in the 311 export excerpt list a location on or at the Northern Avenue Bridge?",
+    "expected_answer": "9 of the 28 rows — three trespassing on the closed structure, two barrier/fence damage, two debris in waterway, one streetlight outage on the approach, and one graffiti report on the abutment.",
+    "wrong_answers": [
+      "Counting only the trespassing rows (3)",
+      "A near-miss count such as 7 or 8 from rows lost at chunk boundaries",
+      "28 — counting every row in the export"
+    ]
+  },
+  {
+    "id": "9B",
+    "category": "Aggregation & Counting",
+    "difficulty": "Medium",
+    "question": "How many 311 requests in the export excerpt were submitted in a language other than English, and in which languages?",
+    "expected_answer": "7 of the 28 rows: three in Spanish, two in Haitian Creole, and two in Chinese.",
+    "wrong_answers": [
+      "Counting only the Spanish rows (3)",
+      "Including English rows in the count",
+      "Naming the languages without the per-language counts"
+    ]
+  }
+]
